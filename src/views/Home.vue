@@ -1,16 +1,18 @@
 <template>
   <main v-if="!loading">
-    Show Data
+    <data-title :text="title" :dataDate="dataDate"/>
   </main>
   <main class="flex flex-col align-center justify-center text-center" v-else>
     <div class="text-gray-500 text-3xl mt-10 mb-6">
       Fetching Data
     </div>
-    <img :src="loadImage" class="w-24 mx-auto" alt="">
+    <img :src="loadImage" class="w-24 m-auto" alt="">
   </main>
 </template>
 
 <script>
+import DataTitle from '@/components/DataTitle'
+
 export default {
   name: 'Home',
   data() {
@@ -23,7 +25,9 @@ export default {
       loadImage: require('../assets/hourglass.gif')
     }
   },
-  components: {},
+  components: {
+    DataTitle
+  },
   methods: {
     async fetchCovidData() {
       const res = await fetch('https://api.covid19api.com/summary')
